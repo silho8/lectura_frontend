@@ -31,11 +31,11 @@ const ForgotPasswordPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-brand-background px-4">
-            <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-pixel-white px-4">
+            <div className="max-w-sm w-full bg-pixel-white border-4 border-pixel-black p-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800">Forgot Password</h1>
-                    <p className="text-gray-500 mt-2">Enter your email to receive a reset token.</p>
+                    <h1 className="text-2xl text-pixel-black">Forgot Password</h1>
+                    <p className="text-pixel-black mt-2 text-lg">We'll send a reset token.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -45,31 +45,31 @@ const ForgotPasswordPage = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@example.com"
+                        placeholder="user@school.com"
                         required
                     />
 
-                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-                    {message && <p className="text-green-600 text-sm text-center">{message}</p>}
+                    {error && <p className="text-pixel-red text-lg text-center">{error}</p>}
+                    {message && <p className="text-pixel-green text-lg text-center">{message}</p>}
 
                     {resetToken && (
-                        <div className="p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
-                            <p className="text-sm text-yellow-800">
-                                <strong>Dev Mode Only:</strong> Your reset token is:
+                        <div className="p-4 bg-pixel-purple border-2 border-pixel-black">
+                            <p className="text-lg text-pixel-black">
+                                <strong>Dev Only:</strong> Reset token:
                             </p>
-                            <p className="text-xs text-yellow-700 break-all mt-2">{resetToken}</p>
+                            <p className="text-sm text-pixel-black break-all mt-2">{resetToken}</p>
                         </div>
                     )}
 
 
                     <FormButton isLoading={loading}>
-                        Send Reset Token
+                        Send Token
                     </FormButton>
                 </form>
 
-                <p className="text-center text-sm text-gray-600 mt-8">
-                    Remembered your password?{' '}
-                    <Link to="/login" className="font-medium text-brand-blue hover:underline">
+                <p className="text-center text-lg text-pixel-black mt-8">
+                    Remembered it?{' '}
+                    <Link to="/login" className="font-mono text-pixel-blue hover:underline">
                         Sign In
                     </Link>
                 </p>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import DashboardLayout from '../layouts/DashboardLayout';
 import Header from '../components/Header';
 import adminService from '../services/adminService';
+import FormButton from '../components/forms/FormButton';
 
 const AdminDashboardPage = () => {
     const [view, setView] = useState('users'); // 'users' or 'notes'
@@ -46,34 +46,34 @@ const AdminDashboardPage = () => {
     };
 
     return (
-        <DashboardLayout>
+        <>
             <Header title="Admin Dashboard" />
-            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-brand-background p-4 md:p-8">
-                <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <div className="border-b border-gray-200 mb-4">
-                        <nav className="flex space-x-4">
-                            <button onClick={() => setView('users')} className={`py-2 px-4 font-semibold ${view === 'users' ? 'border-b-2 border-brand-blue text-brand-blue' : 'text-gray-500'}`}>
-                                Manage Users
-                            </button>
-                            <button onClick={() => setView('notes')} className={`py-2 px-4 font-semibold ${view === 'notes' ? 'border-b-2 border-brand-blue text-brand-blue' : 'text-gray-500'}`}>
-                                Manage Notes
-                            </button>
-                        </nav>
-                    </div>
+            <div className="bg-pixel-white p-4 border-4 border-pixel-black">
+                <div className="border-b-4 border-pixel-black mb-4">
+                    <nav className="flex space-x-4">
+                        <button onClick={() => setView('users')} className={`py-2 px-4 font-mono text-lg ${view === 'users' ? 'bg-pixel-blue text-pixel-white' : 'text-pixel-black'}`}>
+                            Manage Users
+                        </button>
+                        <button onClick={() => setView('notes')} className={`py-2 px-4 font-mono text-lg ${view === 'notes' ? 'bg-pixel-blue text-pixel-white' : 'text-pixel-black'}`}>
+                            Manage Notes
+                        </button>
+                    </nav>
+                </div>
 
-                    {loading && <p>Loading...</p>}
+                {loading && <p className="font-mono text-lg">Loading...</p>}
 
+                <div className="overflow-x-auto">
                     {view === 'users' && (
-                        <table className="w-full text-left">
-                            <thead><tr className="border-b"><th className="p-2">ID</th><th className="p-2">Name</th><th className="p-2">Email</th><th className="p-2">Status</th><th className="p-2">Actions</th></tr></thead>
+                        <table className="w-full text-left font-mono text-lg">
+                            <thead><tr className="border-b-4 border-pixel-black"><th className="p-2">ID</th><th className="p-2">Name</th><th className="p-2">Email</th><th className="p-2">Status</th><th className="p-2">Actions</th></tr></thead>
                             <tbody>
                                 {users.map(user => (
-                                    <tr key={user.id} className="border-b hover:bg-gray-50">
+                                    <tr key={user.id} className="border-b-2 border-pixel-purple">
                                         <td className="p-2">{user.id}</td>
                                         <td className="p-2">{user.full_name}</td>
                                         <td className="p-2">{user.email}</td>
-                                        <td className="p-2"><span className={`px-2 py-1 text-xs rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{user.status}</span></td>
-                                        <td className="p-2"><button onClick={() => handleBanUser(user.id)} className="text-red-600 hover:underline">Toggle Ban</button></td>
+                                        <td className="p-2"><span className={`px-2 py-1 text-xs ${user.status === 'active' ? 'bg-pixel-green text-pixel-white' : 'bg-pixel-red text-pixel-white'}`}>{user.status}</span></td>
+                                        <td className="p-2"><button onClick={() => handleBanUser(user.id)} className="text-pixel-red hover:underline">Toggle Ban</button></td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -81,24 +81,24 @@ const AdminDashboardPage = () => {
                     )}
 
                     {view === 'notes' && (
-                        <table className="w-full text-left">
-                            <thead><tr className="border-b"><th className="p-2">ID</th><th className="p-2">Title</th><th className="p-2">Uploader</th><th className="p-2">Visibility</th><th className="p-2">Actions</th></tr></thead>
+                        <table className="w-full text-left font-mono text-lg">
+                            <thead><tr className="border-b-4 border-pixel-black"><th className="p-2">ID</th><th className="p-2">Title</th><th className="p-2">Uploader</th><th className="p-2">Visibility</th><th className="p-2">Actions</th></tr></thead>
                             <tbody>
                                 {notes.map(note => (
-                                    <tr key={note.id} className="border-b hover:bg-gray-50">
+                                    <tr key={note.id} className="border-b-2 border-pixel-purple">
                                         <td className="p-2">{note.id}</td>
                                         <td className="p-2">{note.title}</td>
                                         <td className="p-2">{note.uploader.full_name}</td>
                                         <td className="p-2">{note.visibility}</td>
-                                        <td className="p-2"><button onClick={() => handleDeleteNote(note.id)} className="text-red-600 hover:underline">Delete</button></td>
+                                        <td className="p-2"><button onClick={() => handleDeleteNote(note.id)} className="text-pixel-red hover:underline">Delete</button></td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     )}
                 </div>
-            </main>
-        </DashboardLayout>
+            </div>
+        </>
     );
 };
 

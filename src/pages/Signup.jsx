@@ -34,11 +34,11 @@ const SignupPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-brand-background px-4 py-8">
-            <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-pixel-white px-4 py-8">
+            <div className="max-w-sm w-full bg-pixel-white border-4 border-pixel-black p-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800">Welcome</h1>
-                    <p className="text-gray-500 mt-2">Create your account to get started.</p>
+                    <h1 className="text-3xl text-pixel-black">Create Account</h1>
+                    <p className="text-pixel-black mt-2 text-lg">Join the community!</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -57,7 +57,7 @@ const SignupPage = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@example.com"
+                        placeholder="user@school.com"
                         required
                     />
                     <FormInput
@@ -66,7 +66,7 @@ const SignupPage = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
+                        placeholder="********"
                         required
                     />
                     <FormInput
@@ -75,20 +75,20 @@ const SignupPage = () => {
                         type="password"
                         value={repeatPassword}
                         onChange={(e) => setRepeatPassword(e.target.value)}
-                        placeholder="••••••••"
+                        placeholder="********"
                         required
                     />
 
-                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                    {error && <p className="text-pixel-red text-lg text-center">{error}</p>}
 
                     <FormButton isLoading={loading} fullWidth>
                         Sign Up
                     </FormButton>
                 </form>
 
-                <p className="text-center text-sm text-gray-600 mt-8">
+                <p className="text-center text-lg text-pixel-black mt-8">
                     Already have an account?{' '}
-                    <Link to="/login" className="font-medium text-brand-blue hover:underline">
+                    <Link to="/login" className="font-mono text-pixel-blue hover:underline">
                         Sign In
                     </Link>
                 </p>

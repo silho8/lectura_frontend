@@ -28,11 +28,11 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-brand-background px-4">
-            <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-pixel-white px-4">
+            <div className="max-w-sm w-full bg-pixel-white border-4 border-pixel-black p-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800">Welcome back</h1>
-                    <p className="text-gray-500 mt-2">Please sign in to continue.</p>
+                    <h1 className="text-3xl text-pixel-black">Login</h1>
+                    <p className="text-pixel-black mt-2 text-lg">Welcome back, student!</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -42,7 +42,7 @@ const LoginPage = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="you@example.com"
+                        placeholder="user@school.com"
                         required
                     />
                     <FormInput
@@ -51,25 +51,25 @@ const LoginPage = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
+                        placeholder="********"
                         required
                     />
                     <div className="text-right">
-                        <Link to="/forgot-password" className="text-sm font-medium text-brand-blue hover:underline">
+                        <Link to="/forgot-password" className="text-lg font-mono text-pixel-blue hover:underline">
                             Forgot password?
                         </Link>
                     </div>
 
-                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                    {error && <p className="text-pixel-red text-lg text-center">{error}</p>}
 
                     <FormButton isLoading={loading}>
                         Sign In
                     </FormButton>
                 </form>
 
-                <p className="text-center text-sm text-gray-600 mt-8">
-                    Don't have an account?{' '}
-                    <Link to="/signup" className="font-medium text-brand-blue hover:underline">
+                <p className="text-center text-lg text-pixel-black mt-8">
+                    No account?{' '}
+                    <Link to="/signup" className="font-mono text-pixel-blue hover:underline">
                         Sign up
                     </Link>
                 </p>
