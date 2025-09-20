@@ -1,60 +1,54 @@
 import React from 'react';
-import { FiDownload, FiEye, FiUser, FiTag } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const NoteCard = ({ note }) => {
   const fileCount = note.files?.length || 0;
-  const firstFile = note.files?.[0];
 
-  const getFileTypeLabel = (mimetype) => {
-    if (mimetype.startsWith('image/')) return `${fileCount} Image(s)`;
-    if (mimetype === 'application/pdf') return `${fileCount} PDF(s)`;
-    if (mimetype.includes('word')) return `${fileCount} DOCX`;
-    return `${fileCount} File(s)`;
+  const getFileTypeLabel = () => {
+    if (fileCount === 0) return 'No files';
+    if (fileCount === 1) return '1 file';
+    return `${fileCount} files`;
   };
 
   return (
-    <Link to={`/notes/${note.id}`} className="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+    <Link to={`/notes/${note.id}`} className="block bg-pixel-white border-4 border-pixel-black p-4 hover:bg-pixel-purple transition-colors duration-200">
       <div className="flex justify-between items-start mb-3">
-        <h3 className="text-xl font-bold text-gray-800 truncate">{note.title}</h3>
-        {firstFile && (
-            <span className="text-xs font-semibold text-white bg-brand-blue px-2 py-1 rounded-full">
-                {getFileTypeLabel(firstFile.mimetype)}
-            </span>
-        )}
+        <h3 className="text-2xl text-pixel-black truncate">{note.title}</h3>
+        <span className="text-sm font-mono text-pixel-white bg-pixel-blue px-2 py-1">
+            {note.course_code}
+        </span>
       </div>
-      <p className="text-brand-blue font-semibold mb-3">{note.course_code}</p>
 
-      <div className="text-sm text-gray-500 space-y-2">
+      <div className="font-mono text-pixel-black space-y-2 text-lg">
         <div className="flex items-center">
-            <FiUser className="mr-2" />
-            <span>Shared by {note.uploader?.full_name || 'Unknown'}</span>
+            <span className="mr-2">👤</span>
+            <span>{note.uploader?.full_name || 'Unknown'}</span>
         </div>
         <div className="flex items-center">
-            <FiEye className="mr-2" />
+            <span className="mr-2">👁️</span>
             <span className="capitalize">{note.visibility}</span>
         </div>
-        {note.tags && note.tags.length > 0 && (
-            <div className="flex items-center flex-wrap pt-2">
-                <FiTag className="mr-2" />
-                {note.tags.map(tag => (
-                    <span key={tag} className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-1 mb-1">{tag}</span>
-                ))}
-            </div>
-        )}
+        <div className="flex items-center">
+            <span className="mr-2">📁</span>
+            <span>{getFileTypeLabel()}</span>
+        </div>
       </div>
 
-      <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
-        <p className="text-xs text-gray-400">
+      {note.tags && note.tags.length > 0 && (
+        <div className="flex items-center flex-wrap pt-3 mt-3 border-t-2 border-pixel-black">
+            {note.tags.map(tag => (
+                <span key={tag} className="text-xs font-mono bg-pixel-light-blue text-pixel-white px-2 py-1 mr-1 mb-1">{tag}</span>
+            ))}
+        </div>
+      )}
+
+      <div className="mt-4 pt-4 border-t-2 border-pixel-black flex items-center justify-between">
+        <p className="text-sm font-mono text-pixel-black">
             {new Date(note.created_at).toLocaleDateString()}
         </p>
-        <button
-            onClick={(e) => { e.preventDefault(); alert('Download clicked!'); }}
-            className="flex items-center text-sm font-medium text-brand-blue hover:underline"
-        >
-            <FiDownload className="mr-1" />
-            Download All
-        </button>
+        <div className="text-lg font-mono text-pixel-blue hover:underline">
+            View Details
+        </div>
       </div>
     </Link>
   );

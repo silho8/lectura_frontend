@@ -6,22 +6,25 @@ export default {
   ],
   theme: {
     extend: {
-      // Based on the UI mockups provided
       colors: {
-        'brand-blue': {
-          DEFAULT: '#0D6EFD', // A prominent blue from the buttons
-          dark: '#0A58CA',
-        },
-        'brand-gray': {
-          light: '#F8F9FA',
-          DEFAULT: '#6C757D',
-          dark: '#343A40',
-        },
-        'brand-background': '#F0F2F5', // Light gray background
+        'pixel-blue': '#3D52A0',
+        'pixel-light-blue': '#7091E6',
+        'pixel-purple': '#ADBBDA',
+        'pixel-white': '#EAEFFF',
+        'pixel-black': '#1E1E1E',
+        'pixel-red': '#D9534F',
+        'pixel-green': '#5CB85C',
       },
       fontFamily: {
-        // Using Inter as a default modern, clean font
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Press Start 2P"', 'cursive'],
+        mono: ['"VT323"', 'monospace'],
+      },
+      boxShadow: {
+        'pixel': '4px 4px 0px #1E1E1E',
+        'pixel-sm': '2px 2px 0px #1E1E1E',
+      },
+      borderRadius: {
+        'none': '0',
       }
     },
   },

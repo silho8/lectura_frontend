@@ -1,27 +1,21 @@
 import React from 'react';
-import { FiBell, FiSearch } from 'react-icons/fi';
+import { useAuth } from '../context/AuthContext';
 
-const Header = ({ title, userName }) => {
+const Header = ({ title }) => {
+  const { user } = useAuth();
+
   return (
-    <header className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
-      <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
-      <div className="flex items-center space-x-4">
-        <button className="p-2 rounded-full hover:bg-gray-100">
-          <FiSearch size={20} className="text-gray-600" />
-        </button>
-        <button className="p-2 rounded-full hover:bg-gray-100">
-          <FiBell size={20} className="text-gray-600" />
-        </button>
-        <div className="flex items-center">
-          <img
-            src={`https://ui-avatars.com/api/?name=${userName}&background=0D6EFD&color=fff`}
-            alt="User Avatar"
-            className="w-10 h-10 rounded-full"
-          />
-          <div className="ml-3 hidden md:block">
-            <p className="font-semibold text-gray-800">{userName}</p>
-            <p className="text-sm text-gray-500">Student</p>
-          </div>
+    <header className="flex items-center justify-between p-4 bg-pixel-white border-b-4 border-pixel-black mb-8">
+      <h1 className="text-3xl text-pixel-black">{title}</h1>
+      <div className="flex items-center">
+        <img
+          src={`https://api.dicebear.com/8.x/pixel-art/svg?seed=${user?.full_name}`}
+          alt="User Avatar"
+          className="w-12 h-12 border-2 border-pixel-black"
+        />
+        <div className="ml-4 hidden md:block">
+          <p className="font-mono text-lg text-pixel-black">{user?.full_name}</p>
+          <p className="font-mono text-sm text-pixel-blue">{user?.role}</p>
         </div>
       </div>
     </header>
@@ -30,7 +24,6 @@ const Header = ({ title, userName }) => {
 
 Header.defaultProps = {
     title: "Dashboard",
-    userName: "Guest"
 }
 
 export default Header;

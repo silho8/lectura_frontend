@@ -1,7 +1,8 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 
+import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
@@ -16,6 +17,22 @@ import ProfilePage from './pages/Profile';
 import AdminDashboardPage from './pages/AdminDashboard';
 import AdminRoute from './components/AdminRoute';
 
+const AnimatedOutlet = () => {
+  const location = useLocation();
+  return (
+    <div key={location.pathname} className="page-enter-active">
+      <Outlet />
+    </div>
+  );
+}
+
+const ProtectedLayout = () => (
+  <DashboardLayout>
+    <AnimatedOutlet />
+  </DashboardLayout>
+);
+
+
 function App() {
   const { isAuthenticated } = useAuth();
 
@@ -29,17 +46,17 @@ function App() {
 
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/notes" element={<NotesPage />} />
-        <Route path="/notes/:id" element={<NoteDetailPage />} />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route path="/cgpa" element={<CgpaPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-      </Route>
-
-      {/* Admin Routes */}
-      <Route element={<AdminRoute />}>
-        <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route element={<ProtectedLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/notes" element={<NotesPage />} />
+          <Route path="/notes/:id" element={<NoteDetailPage />} />
+          <Route path="/upload" element={<UploadPage />} />
+          <Route path="/cgpa" element={<CgpaPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminDashboardPage />} />
+          </Route>
+        </Route>
       </Route>
 
       {/* Default Route */}

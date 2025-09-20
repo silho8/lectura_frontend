@@ -27,7 +27,7 @@ const ResetPasswordPage = () => {
         setLoading(true);
         try {
             const data = await authService.resetPassword({ token, new_password: newPassword });
-            setMessage(data.message + " You will be redirected to login shortly.");
+            setMessage(data.message + " Redirecting to login...");
             setTimeout(() => navigate('/login'), 3000);
         } catch (err) {
             setError(err.response?.data?.message || 'An error occurred.');
@@ -37,11 +37,11 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-brand-background px-4">
-            <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-pixel-white px-4">
+            <div className="max-w-sm w-full bg-pixel-white border-4 border-pixel-black p-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800">Reset Password</h1>
-                    <p className="text-gray-500 mt-2">Enter your token and a new password.</p>
+                    <h1 className="text-3xl text-pixel-black">Reset Password</h1>
+                    <p className="text-pixel-black mt-2 text-lg">Enter a new password.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -51,7 +51,7 @@ const ResetPasswordPage = () => {
                         type="text"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
-                        placeholder="Paste your token here"
+                        placeholder="Paste token here"
                         required
                     />
                     <FormInput
@@ -60,20 +60,20 @@ const ResetPasswordPage = () => {
                         type="password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        placeholder="••••••••"
+                        placeholder="********"
                         required
                     />
 
-                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-                    {message && <p className="text-green-600 text-sm text-center">{message}</p>}
+                    {error && <p className="text-pixel-red text-lg text-center">{error}</p>}
+                    {message && <p className="text-pixel-green text-lg text-center">{message}</p>}
 
                     <FormButton isLoading={loading}>
                         Reset Password
                     </FormButton>
                 </form>
 
-                 <p className="text-center text-sm text-gray-600 mt-8">
-                    <Link to="/login" className="font-medium text-brand-blue hover:underline">
+                 <p className="text-center text-lg text-pixel-black mt-8">
+                    <Link to="/login" className="font-mono text-pixel-blue hover:underline">
                         Back to Sign In
                     </Link>
                 </p>
